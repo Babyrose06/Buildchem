@@ -96,7 +96,7 @@ const Login: React.FC = () => {
         {/* Register Link */}
         <div className="relative z-10 mt-4 text-center">
           <p className="text-xs text-gray-400">
-            Don't have an account{" "}
+            Don't have an account?{" "}
             <Link href="/Register" className="text-blue-400 hover:underline">
               Register here
             </Link>
