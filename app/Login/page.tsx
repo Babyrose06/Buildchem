@@ -63,9 +63,9 @@ const Login: React.FC = () => {
       <div className="w-full max-w-sm bg-white text-black rounded-lg shadow-xl p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-green-500/10 blur-2xl z-0" />
         <div className="relative z-10 flex flex-col items-center text-center mb-6">
-          <Image src="/Buildchem.png" alt="Buildchem" width={160} height={60} className="mb-4" />
+          <Image src="/buildchem.png" alt="Buildchem" width={160} height={60} className="mb-4" />
           <p className="text-xs font-medium text-black">
-            Authorized access only. Use the credentials provided.s
+            Authorized access only. Use the credentials provided.
           </p>
         </div>
 

@@ -90,7 +90,7 @@ const Sidebar: React.FC<{ isOpen: boolean, onClose: () => void; isDarkMode: bool
         {/* Logo Section */}
         <div className="flex items-center justify-between p-5 bg-white border-r">
           <div className="flex items-center">
-            <img src="/Buildchem.png" alt="Logo" className="h-10" />
+            <img src="/buildchem.png" alt="Logo" className="h-10" />
             <Link href={`/Backend/Buildchem/Dashboard${userId ? `?id=${encodeURIComponent(userId)}` : ''}`}>
             </Link>
           </div>
