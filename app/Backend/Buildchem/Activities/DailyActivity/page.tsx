@@ -28,6 +28,7 @@ export default function Post() {
     const [editingPostId, setEditingPostId] = useState<string | null>(null);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const initialFormState = {
         CompanyName: "",
@@ -119,9 +120,9 @@ export default function Post() {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Are you sure you want to delete this data?")) return;
+        if (!confirm("Are you sure you want to delete the activity?")) return;
         try {
-            const res = await fetch(`/api/Backend/Database/delete?id=${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/Backend/Activities/delete?id=${id}`, { method: "DELETE" });
             const result = await res.json();
             if (res.ok) {
                 toast.success("Data deleted");
@@ -200,7 +201,10 @@ export default function Post() {
                                 setStartDate={setStartDate}
                                 endDate={endDate}
                                 setEndDate={setEndDate}
-                                onAddClick={() => setShowForm(true)}
+                                itemsPerPage={itemsPerPage}
+                                setItemsPerPage={setItemsPerPage}
+                                onAddClick={() => setShowForm(true)}         
+                                
                             />
 
                             <Table

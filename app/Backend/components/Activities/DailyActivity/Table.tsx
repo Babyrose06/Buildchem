@@ -107,7 +107,7 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
       <div className="flex justify-between items-center p-4 border-b">
-        <h2 className="text-lg font-semibold text-gray-800">Customer Records</h2>
+        <h2 className="text-lg font-semibold text-gray-800">Actvity Informations</h2>
         <button
           onClick={handleExport}
           className={` ml-auto
@@ -246,7 +246,7 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                       d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="mt-2">No data found</span>
+                  <span className="mt-2">No activity found</span>
                 </div>
               </td>
             </tr>

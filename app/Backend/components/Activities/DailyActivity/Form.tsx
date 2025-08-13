@@ -51,8 +51,8 @@ const Form: React.FC<FormProps> = ({
     };
 
     const url = isEditMode
-      ? `/api/Backend/Database/edit?id=${editingPostId}`
-      : "/api/Backend/Database/create";
+      ? `/api/Backend/Activities/edit?id=${editingPostId}`
+      : "/api/Backend/Activities/create";
 
     const method = isEditMode ? "PUT" : "POST";
 
@@ -66,7 +66,7 @@ const Form: React.FC<FormProps> = ({
       const result = await res.json();
 
       if (res.ok) {
-        toast.success(isEditMode ? "Data Updated!" : "Data added!");
+        toast.success(isEditMode ? "Activity Created!" : "Activity added!");
         setShowForm(false);
         setIsEditMode(false);
         setEditingPostId(null);
@@ -76,7 +76,7 @@ const Form: React.FC<FormProps> = ({
         toast.error(result.message || "Error occurred.");
       }
     } catch (error) {
-      toast.error("Failed to save data.");
+      toast.error("Failed to save activity.");
     }
   };
 

@@ -29,7 +29,7 @@ export default function Filters({
           onClick={onAddClick}
         >
           <FiPlus className="text-base" />
-          <span> Create Activity</span>
+          <span> Create Activity </span>
         </button>
 
         {/* Search and Date Filters */}
