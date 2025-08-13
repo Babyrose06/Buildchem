@@ -65,7 +65,6 @@ const Sidebar: React.FC<{ isOpen: boolean, onClose: () => void; isDarkMode: bool
       [
         "Customer Database",
         "Activities",
-        "Reports",
       ].includes(item.title)
     );
   })();

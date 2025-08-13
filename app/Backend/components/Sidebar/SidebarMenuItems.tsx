@@ -25,20 +25,14 @@ const getMenuItems = (userId: string | null = "") => {
     ],
   });
 
-  // Activities section
-  menu.push({
-    title: "Activies",
-    icon: HiOutlineDocumentText,
+   menu.push({
+    title: "Activities",
+    icon: FaRegUser,
     subItems: [
       {
-        title: "Scheduled Task",
-        description: "Upcoming Tasks and Reminders",
-        href: buildHref("/pages", userId),
-      },
-      {
-        title: "Client Coverage Guide",
-        description: "Client Manager Overview",
-        href: buildHref("/Backend/XchireBackend/HeadFooter", userId),
+        title: "Daily Activity",
+        description: "View all your published and draft data",
+        href: buildHref("/Backend/Buildchem/Activities/DailyActivity", userId),
       },
     ],
   });
