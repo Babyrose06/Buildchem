@@ -6,8 +6,8 @@ import SessionChecker from "../../../components/Session/SessionChecker";
 import { ToastContainer, toast } from "react-toastify";
 import Form from "../../../components/Activities/DailyActivity/Form";
 import Table from "../../../components/Activities/DailyActivity/Table";
-import Filters from "../../../components/Database/Active/Filters";
-import Pagination from "../../../components/Database/Active/Pagination";
+import Filters from "../../../components/Activities/DailyActivity/Filters";
+import Pagination from "../../../components/Activities/DailyActivity/Pagination";
 import { FiSearch, FiX, FiPlus } from "react-icons/fi";
 
 export default function Post() {
@@ -46,7 +46,7 @@ export default function Post() {
 
     const fetchPosts = async (refId: string) => {
         try {
-            const res = await fetch(`/api/Backend/Database/fetch?id=${refId}`);
+            const res = await fetch(`/api/Backend/Activities/fetch?id=${refId}`);
             const json = await res.json();
             setPosts(json.data || []);
         } catch (err) {
