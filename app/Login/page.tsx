@@ -65,7 +65,7 @@ const Login: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center text-center mb-6">
           <Image src="/Buildchem.png" alt="Buildchem" width={160} height={60} className="mb-4" />
           <p className="text-xs font-medium text-black">
-            Authorized access only. Use the credentials provided.
+            Authorized access only. Use the credentials provided.s
           </p>
         </div>
 
