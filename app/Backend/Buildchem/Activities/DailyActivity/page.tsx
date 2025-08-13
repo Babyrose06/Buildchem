@@ -139,7 +139,7 @@ export default function Post() {
             <ParentLayout>
                 <div className="container mx-auto p-4 text-gray-900">
                     <div className="grid grid-cols-1 md:grid-cols-1">
-                        <h1 className="text-2xl font-bold mb-6">Activities - Daily</h1>
+                        <h1 className="text-2xl font-bold mb-6">Activities - Daily Activity</h1>
 
                         {showForm && (
                             <div className="fixed inset-0 z-[999] overflow-hidden">
