@@ -61,6 +61,8 @@ export default function Filters({
             )}
           </div>
 
+          
+
           {/* Date Filters */}
           <div className="flex items-center gap-2">
             <input 
@@ -91,12 +93,11 @@ export default function Filters({
               className="border px-2 py-1 rounded text-xs w-20"
             >
               <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
               <option value="50">50</option>
               <option value="100">100</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
             </select>
-
 
           </div>
         </div>

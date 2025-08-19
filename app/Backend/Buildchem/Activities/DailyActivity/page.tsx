@@ -147,7 +147,10 @@ export default function Post() {
             <ParentLayout>
                 <div className="container mx-auto p-4 text-gray-900">
                     <div className="grid grid-cols-1 md:grid-cols-1">
-                        <h1 className="text-2xl font-bold mb-6">Activities - Daily Activity</h1>
+                        <h1 className="text-2xl font-bold mb-3">Activities - Daily Activity</h1>
+                        <h1 className="text-xs mb-6">The Active Company Accounts section displays all currently active accounts.
+                             Users can filter and explore accounts by client type, date range, and other criteria, making it easier to manage and analyze up-to-date company data.</h1>
+
 
                         {showForm && (
                             <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 overflow-hidden">
