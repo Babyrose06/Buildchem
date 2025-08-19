@@ -23,14 +23,6 @@ export default function Filters({
   return (
     <div className="flex flex-col gap-4 mb-6">
       <div className="flex items-center justify-between gap-4 w-full">
-        {/* Add New Customer Button */}
-        <button
-          className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white text-xs font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          onClick={onAddClick}
-        >
-          <FiPlus className="text-base" />
-          <span>Add New Customer</span>
-        </button>
 
         {/* Search and Date Filters */}
         <div className="flex items-center gap-3 flex-1">

@@ -8,6 +8,8 @@ interface FiltersProps {
   setStartDate: (date: string) => void;
   endDate: string;
   setEndDate: (date: string) => void;
+  postsPerPage: number;
+  setPostsPerPage: (value: number) => void;
   onAddClick: () => void;
 }
 
@@ -18,7 +20,10 @@ export default function Filters({
   setStartDate,
   endDate,
   setEndDate,
+  postsPerPage,
+  setPostsPerPage,
   onAddClick,
+  
 }: FiltersProps) {
   return (
     <div className="flex flex-col gap-4 mb-6">
@@ -71,6 +76,28 @@ export default function Filters({
               onChange={(e) => setEndDate(e.target.value)} 
               className="border px-3 py-2 rounded text-xs w-36" 
             />
+
+             </div>
+
+          {/* Items Per Page Selector */}
+          <div className=" ml-auto flex items-center gap-2">
+            <label htmlFor="itemsPerPage" className="text-xs text-gray-600">
+              Show:
+            </label>
+            <select
+              id="itemsPerPage"
+              value={postsPerPage}
+              onChange={(e) => setPostsPerPage(Number(e.target.value))}
+              className="border px-2 py-1 rounded text-xs w-20"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+
+
           </div>
         </div>
       </div>

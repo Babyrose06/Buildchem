@@ -7,14 +7,16 @@ import { saveAs } from "file-saver";
 interface Product {
   _id: string;
   CompanyName: string;
-  Email: string;
-  ContactPerson: string;
-  ContactNumber: string;
+  Project: string;
+  QuotationAmount: string;
+  SOAmount: string;
+  Category: string;
+  Type: string;
+  Source: string;
+  Status: string;
   ReferenceID: string;
   createdAt: string;
   updatedAt: string;
-  Product?: string; // Added optional field
-  Address?: string; // Added optional field
 }
 
 interface TableProps {
@@ -36,11 +38,13 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     // Set columns
     worksheet.columns = [
       { header: "Company Name", key: "companyName", width: 25 },
-      { header: "Email", key: "email", width: 25 },
-      { header: "Contact Person", key: "contactPerson", width: 20 },
-      { header: "Product", key: "product", width: 20 },
-      { header: "Address", key: "address", width: 30 },
-      { header: "Contact Number", key: "contactNumber", width: 30 },
+      { header: "Project", key: "project", width: 25 },
+      { header: "Quotation Amount", key: "quotation", width: 20 },
+      { header: "SO Amount", key: "soAmount", width: 20 },
+      { header: "Project Category", key: "category", width: 30 },
+      { header: "Project Type", key: "type", width: 30 },
+      { header: "Source", key: "source", width: 30 },
+      { header: "Status", key: "status", width: 30 },
       { header: "Date Created", key: "createdAt", width: 20 },
       { header: "Reference ID", key: "referenceID", width: 15 }
     ];
@@ -69,11 +73,13 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     currentPosts.forEach((post) => {
       worksheet.addRow({
         companyName: post.CompanyName,
-        email: post.Email,
-        contactPerson: post.ContactPerson,
-        product: post.Product || "-",
-        address: post.Address || "-",
-        contactNumber: post.ContactNumber || "-",
+        project: post.Project,
+        quotation: post.QuotationAmount,
+        soAmount: post.SOAmount,
+        category: post.Category,
+        source: post.Source,
+        status: post.Status,
+        type: post.Type,
         createdAt: new Date(post.createdAt).toLocaleString("en-PH", {
           year: "numeric",
           month: "short",
@@ -104,10 +110,16 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     saveAs(new Blob([buffer]), `Customer_Data_${new Date().toISOString().slice(0, 10)}.xlsx`);
   };
 
+  const statusColors: { [key: string]: string } = {
+    Ongoing: "bg-yellow-500",
+    Existing: "bg-red-800",
+    Done: "bg-green-800",
+  };
+
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
       <div className="flex justify-between items-center p-4 border-b">
-        <h2 className="text-lg font-semibold text-gray-800">Actvity Informations</h2>
+        <h2 className="text-lg font-semibold text-gray-800">Actvity Information</h2>
         <button
           onClick={handleExport}
           className={` ml-auto
@@ -138,29 +150,38 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
           Export to Excel
         </button>
       </div>
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="text-left min-w-full divide-y divide-gray-200">
         <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+            <th className="text-center px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Actions
+            </th>
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Company Name
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Email
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Project Name
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Contact Person
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Quotation Amount
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Address
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              SO Amount (Sales Order)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Contact Number
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Project Category
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Project Type
+            </th>
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Source
+            </th>
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Status
+            </th>
+            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Date Created
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Actions
             </th>
           </tr>
         </thead>
@@ -171,6 +192,22 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                 key={index}
                 className="hover:bg-gray-50 transition-colors duration-150"
               >
+                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEdit(post)}
+                      className="text-indigo-600 hover:text-indigo-900 border border-indigo-600 rounded px-2 py-1 hover:bg-indigo-50 transition-colors"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(post._id)}
+                      className="text-red-600 hover:text-red-900 border border-red-600 rounded px-2 py-1 hover:bg-red-50 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="text-xs font-medium text-gray-900 uppercase">
@@ -180,22 +217,42 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.Email}
+                    {post.Project}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.ContactPerson}
+                    {post.QuotationAmount}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.Address || "-"}
+                    {post.SOAmount || "-"}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.ContactNumber || "-"}
+                    {post.Category || "-"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.Type || "-"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.Source || "-"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    <span
+                      className={`text-white shadow-md text-[10px] px-2 py-1 mr-2 rounded-full ${statusColors[post.Status] || "bg-gray-400"
+                        }`}
+                    >
+                      {post.Status}
+                    </span>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -209,28 +266,11 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                     })}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEdit(post)}
-                      className="text-indigo-600 hover:text-indigo-900 hover:underline"
-                    >
-                      Edit
-                    </button>
-                    <span className="text-gray-300">|</span>
-                    <button
-                      onClick={() => handleDelete(post._id)}
-                      className="text-red-600 hover:text-red-900 hover:underline"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
+              <td colSpan={9} className="px-6 py-4 text-center text-sm text-gray-500">
                 <div className="flex flex-col items-center justify-center py-8">
                   <svg
                     className="w-12 h-12 text-gray-400"

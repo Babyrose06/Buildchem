@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import CompaniesTab from "./Tabs/CompaniesTab";
+import ActivityTab from "./Tabs/ActivityTab";
 
 interface FormFieldsProps {
     postData: any;
     handleChange: (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> | { target: { name: string; value: any } }
     ) => void;
     setPostData: React.Dispatch<React.SetStateAction<any>>;
     setShowForm: (show: boolean) => void;
@@ -26,94 +28,34 @@ const FormFields: React.FC<FormFieldsProps> = ({
     initialFormState,
 }) => {
 
+    const generateTicketReferenceNumber = () => {
+    const randomNumber = Math.floor(100000000 + Math.random() * 900000000);
+    return `ID-Buildchem-${randomNumber}`;
+  };
+
+  useEffect(() => {
+    if (!isEditMode && !postData.ActivityID) {
+      setPostData((prev: any) => ({
+        ...prev,
+        ActivityID: generateTicketReferenceNumber(),
+      }));
+    }
+  }, [isEditMode, postData.ActivityID, setPostData]);
+
     return (
         <form onSubmit={handleSubmit} className="text-xs space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
-                <div>
-                    <label className="block text-xs font-bold mb-1">Company Name</label>
-                    <input
-                        name="CompanyName"
-                        value={postData.CompanyName || ""}
-                        onChange={handleChange}
-                        placeholder="Company Name"
-                        className="border rounded p-2 text-xs w-full"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-xs font-bold mb-1">Email</label>
-                    <input
-                        name="Email"
-                        value={postData.Email || ""}
-                        onChange={handleChange}
-                        placeholder="Email"
-                        className="border rounded p-2 text-xs w-full"
-                        required
-                    />
-                </div>
-                
-                <div>
-                    <label className="block text-xs font-bold mb-1">Contact Person</label>
-                    <input
-                        name="ContactPerson"
-                        value={postData.ContactPerson || ""}
-                        onChange={handleChange}
-                        placeholder="Contact Person"
-                        className="border rounded p-2 text-xs w-full"
-                    />
-                </div>
-
-                {/*
-                <div>
-                    <label className="block text-xs font-bold mb-1">Product</label>
-                    <select
-                        name="Product"
-                        value={postData.Product || ""}
-                        onChange={handleChange}
-                        className="border rounded p-2 text-xs w-full"
-                        required
-                     > 
-                        <option value= "" disabled hidden>
-                            Select Type
-                         </option>
-                         <option value="SI 97"> Buildchem(r) SI 97 </option>
-                         <option value="SI 98"> Buildchem(r) SI 98 </option>
-                         <option value="SI 99"> Buildchem(r) SI 99 </option>
-                         <option value="SI 100"> Buildchem(r) SI 100 </option>
-                         <option value="SI 101"> Buildchem(r) SI 101 </option>
-                         <option value="SI 102"> Buildchem(r) SI 102 </option>
-                        </select>
-                </div>*/}
-
-                 <div>
-                    <label className="block text-xs font-bold mb-1">Complete Address</label>
-                    <input
-                        name="Address"
-                        value={postData.Address || ""}
-                        onChange={handleChange}
-                        placeholder="Address"
-                        className="border rounded p-2 text-xs w-full"
-                    />
-                </div>
-
-                 <div>
-                    <label className="block text-xs font-bold mb-1">Contact Number</label>
-                    <input
-                        name="ContactNumber"
-                        value={postData.ContactNumber || ""}
-                        onChange={handleChange}
-                        placeholder="Contact Number"
-                        className="border rounded p-2 text-xs w-full"
-                    />
-                </div>
+            <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/*CompaniesTab*/}
+                <CompaniesTab postData={postData} handleChange={handleChange} />
+                {/*ActivityTab*/}
+                <ActivityTab postData={postData} handleChange={handleChange} />
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-4 mt-6">
                 <button
                     type="submit"
-                    className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-green-700 text-xs"
+                    className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue- text-xs"
                 >
                     {isEditMode ? "Update" : "Saved"}
                 </button>

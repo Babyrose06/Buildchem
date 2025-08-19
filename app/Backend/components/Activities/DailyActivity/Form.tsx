@@ -3,7 +3,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-import FormFields from "././FormFields";
+import FormFields from "./FormFields";
 
 interface FormProps {
   showForm: boolean;
@@ -33,9 +33,7 @@ const Form: React.FC<FormProps> = ({
   fetchPosts,
 }) => {
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> | { target: { name: string; value: any } }
   ) => {
     const { name, value } = e.target;
     setPostData((prev: any) => ({ ...prev, [name]: value }));

@@ -28,22 +28,27 @@ export default function Post() {
     const [editingPostId, setEditingPostId] = useState<string | null>(null);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [postsPerPage, setPostsPerPage] = useState(12);
 
     const initialFormState = {
         CompanyName: "",
+        Project: "",
         Email: "",
         ContactPerson: "",
-        Product: "",
-        Address: "",
         ContactNumber: "",
+        Address: "",
+        QuotationAmount: "",
+        SOAmount: "",
+        Category: "",
+        Type: "",
+        Source: "",
+        Status: "",
         createdAt: "",
 
     };
 
     const [postData, setPostData] = useState(initialFormState);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
 
     const fetchPosts = async (refId: string) => {
         try {
@@ -85,7 +90,9 @@ export default function Post() {
         // Filter by search term (CompanyName)
         if (searchTerm) {
             filtered = filtered.filter((post) =>
-                post.CompanyName.toLowerCase().includes(searchTerm.toLowerCase())
+                post.CompanyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.Status.toLowerCase().includes(searchTerm.toLowerCase())
+
             );
         }
 
@@ -143,7 +150,7 @@ export default function Post() {
                         <h1 className="text-2xl font-bold mb-6">Activities - Daily Activity</h1>
 
                         {showForm && (
-                            <div className="fixed inset-0 z-[999] overflow-hidden">
+                            <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 overflow-hidden">
                                 {/* Overlay background */}
                                 <div
                                     className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
@@ -154,27 +161,29 @@ export default function Post() {
                                     }}
                                 />
 
-                                {/* Sidebar form panel */}
-                                <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out overflow-y-auto">
-                                    <div className="p-6">
-                                        {/* Header with close button */}
-                                        <div className="flex justify-between items-center mb-6">
-                                            <h3 className="text-lg font-bold text-gray-800 uppercase">
-                                                {isEditMode ? "Edit Record" : "Fill out Form"}
-                                            </h3>
-                                            <button
-                                                onClick={() => {
-                                                    setShowForm(false);
-                                                    setIsEditMode(false);
-                                                    setEditingPostId(null);
-                                                }}
-                                                className="text-gray-500 hover:text-gray-700 transition-colors"
-                                            >
-                                                <FiX className="text-xl" />
-                                            </button>
-                                        </div>
+                                {/* Centered floating modal */}
+                                <div className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-lg shadow-xl transform transition-all duration-300 ease-in-out overflow-y-auto p-4">
 
-                                        {/* Form content */}
+                                    {/* Header with close button */}
+                                    <div className="sticky top-0 z-10 flex justify-between p-4 bg-white border-b">
+                                        <h3 className=" text-center text-lg font-bold text-gray-800 uppercase">
+                                            {isEditMode ? "Edit Record" : "Fill out Form"}
+                                        </h3>
+
+                                        <button
+                                            onClick={() => {
+                                                setShowForm(false);
+                                                setIsEditMode(false);
+                                                setEditingPostId(null);
+                                            }}
+                                            className="p-1 text-gray-500 hover:text-gray-700 transition-colors"
+                                        >
+                                            <FiX className="text-xl" />
+                                        </button>
+                                    </div>
+
+                                    {/* Form content - scrollable area */}
+                                    <div className="p-6">
                                         <Form
                                             showForm={showForm}
                                             isEditMode={isEditMode}
@@ -192,8 +201,7 @@ export default function Post() {
                                 </div>
                             </div>
                         )}
-
-                        <div className="mb-4 p-10 bg-white shadow-md rounded-lg text-gray-900">
+                        <div className=" mb-4 p-10 bg-white shadow-md rounded-lg text-gray-900">
                             <Filters
                                 searchTerm={searchTerm}
                                 setSearchTerm={setSearchTerm}
@@ -201,16 +209,17 @@ export default function Post() {
                                 setStartDate={setStartDate}
                                 endDate={endDate}
                                 setEndDate={setEndDate}
-                                itemsPerPage={itemsPerPage}
-                                setItemsPerPage={setItemsPerPage}
-                                onAddClick={() => setShowForm(true)}         
-                                
+                                postsPerPage={postsPerPage}
+                                setPostsPerPage={setPostsPerPage}
+                                onAddClick={() => setShowForm(true)}
+
                             />
 
                             <Table
                                 currentPosts={currentPosts}
                                 handleEdit={handleEdit}
                                 handleDelete={handleDelete}
+
                             />
 
                             <Pagination
