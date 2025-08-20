@@ -29,24 +29,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       body.CompanyName ??
       null;
 
-    const Project =
-      body.Project ??
-      null;
-
-    const Email =
-      body.Email ??
+    const AffiliateName =
+      body.AffiliateName ??
       null;
 
     const ContactPerson =
       body.ContactPerson ??
       null;
 
+    const Email =
+      body.Email ??
+      null;
+
     const Address =
       body.Address ??
       null;
 
-    const ContactNumber =
-      body.ContactNumber ??
+    const Region =
+      body.Region ??
+      null;
+
+    const CustomerType =
+      body.CustomerType ??
       null;
 
     const QuotationAmount =
@@ -55,18 +59,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const SOAmount =
       body.SOAmount ??
-      null;
-
-    const Category =
-      body.Category ??
-      null;
-
-    const Type =
-      body.Type ??
-      null;
-
-    const Source =
-      body.Source ??
       null;
 
     const Status =
@@ -90,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Insert sa Progress kung may laman
     if (QuotationAmount !== null || SOAmount !== null) {
       const progressData = {
-        ActivityID, CompanyName, Project, ContactPerson, Email, Address, ContactNumber, QuotationAmount, SOAmount, Category, Type, Source, Status,
+        ActivityID, CompanyName, AffiliateName, ContactPerson, Address, Email, Region, CustomerType, QuotationAmount, SOAmount, Status,
         createdAt: new Date(),
         updatedAt: new Date(),
       };

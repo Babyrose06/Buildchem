@@ -41,19 +41,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
                     />
                 </div>
 
-                <div>
-                    <label className="block text-xs font-bold mb-1">Email</label>
-                    <input
-                        name="Email"
-                        value={postData.Email || ""}
-                        onChange={handleChange}
-                        placeholder="Email"
-                        className="border rounded p-2 text-xs w-full"
-                        required
-                    />
-                </div>
-                
-                <div>
+                 <div>
                     <label className="block text-xs font-bold mb-1">Contact Person</label>
                     <input
                         name="ContactPerson"
@@ -64,28 +52,26 @@ const FormFields: React.FC<FormFieldsProps> = ({
                     />
                 </div>
 
-                {/*
-                <div>
-                    <label className="block text-xs font-bold mb-1">Product</label>
-                    <select
-                        name="Product"
-                        value={postData.Product || ""}
-                        onChange={handleChange}
-                        className="border rounded p-2 text-xs w-full"
-                        required
-                     > 
-                        <option value= "" disabled hidden>
-                            Select Type
-                         </option>
-                         <option value="SI 97"> Buildchem(r) SI 97 </option>
-                         <option value="SI 98"> Buildchem(r) SI 98 </option>
-                         <option value="SI 99"> Buildchem(r) SI 99 </option>
-                         <option value="SI 100"> Buildchem(r) SI 100 </option>
-                         <option value="SI 101"> Buildchem(r) SI 101 </option>
-                         <option value="SI 102"> Buildchem(r) SI 102 </option>
-                        </select>
-                </div>*/}
-
+              <div>
+                <label className="block p-1 text-xs font-bold mb-1">Type of Customer </label>
+                <select
+                    name="CustomerType"
+                    value={postData.CustomerType || ""}
+                    onChange={handleChange}
+                    className="border rounded p-2 text-xs w-full"
+                    required
+                >
+                    <option value="" disabled hidden>
+                        Select Client
+                    </option>
+                    <option value="Top 50"> Top 50</option>
+                    <option value="Next 30"> Next 30</option>
+                    <option value="Balance 20"> Balance 20 </option>
+                    <option value="CSR Client"> CSR Client </option>
+                    <option value="TSA Client"> TSA Client</option>
+                </select>
+            </div>
+               
                  <div>
                     <label className="block text-xs font-bold mb-1">Complete Address</label>
                     <input
@@ -96,17 +82,26 @@ const FormFields: React.FC<FormFieldsProps> = ({
                         className="border rounded p-2 text-xs w-full"
                     />
                 </div>
+  <div>
+                <label className="block p-1 text-xs font-bold mb-1">Area</label>
+                <select
+                    name="Region"
+                    value={postData.Region || ""}
+                    onChange={handleChange}
+                    className="border rounded p-2 text-xs w-full"
+                    required
+                >
+                    <option value="" disabled hidden>
+                        Select Area
+                    </option>
+                    <option value="Region I"> Region I - Ilocos Region</option>
+                    <option value="Region II"> Region II - Cagayan Valley  </option>
+                    <option value="Region III"> Region III - Central Luzon </option>
+                    <option value="Region IV"> Region IV - CALABARZON </option>
+                    <option value="Region V"> Region V - Bicol Region</option>
+                </select>
+            </div>
 
-                 <div>
-                    <label className="block text-xs font-bold mb-1">Contact Number</label>
-                    <input
-                        name="ContactNumber"
-                        value={postData.ContactNumber || ""}
-                        onChange={handleChange}
-                        placeholder="Contact Number"
-                        className="border rounded p-2 text-xs w-full"
-                    />
-                </div>
             </div>
 
             {/* Action Buttons */}

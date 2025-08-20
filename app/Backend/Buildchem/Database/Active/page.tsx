@@ -28,6 +28,7 @@ export default function Post() {
     const [editingPostId, setEditingPostId] = useState<string | null>(null);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [postsPerPage, setPostsPerPage] = useState(5);
 
     const initialFormState = {
         CompanyName: "",
@@ -42,7 +43,6 @@ export default function Post() {
 
     const [postData, setPostData] = useState(initialFormState);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
 
     const fetchPosts = async (refId: string) => {
         try {
@@ -199,8 +199,11 @@ export default function Post() {
                                 startDate={startDate}
                                 setStartDate={setStartDate}
                                 endDate={endDate}
+                                postsPerPage={postsPerPage}
                                 setEndDate={setEndDate}
+                                setPostsPerPage={setPostsPerPage}
                                 onAddClick={() => setShowForm(true)}
+                                
                             />
 
                             <Table

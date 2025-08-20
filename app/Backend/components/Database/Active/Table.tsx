@@ -7,9 +7,9 @@ import { saveAs } from "file-saver";
 interface Product {
   _id: string;
   CompanyName: string;
-  Email: string;
+  CustomerType: string;
   ContactPerson: string;
-  ContactNumber: string;
+  Region: string;
   ReferenceID: string;
   createdAt: string;
   updatedAt: string;
@@ -36,11 +36,10 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     // Set columns
     worksheet.columns = [
       { header: "Company Name", key: "companyName", width: 25 },
-      { header: "Email", key: "email", width: 25 },
+      { header: "CustomerType", key: "customerType", width: 25 },
       { header: "Contact Person", key: "contactPerson", width: 20 },
-      { header: "Product", key: "product", width: 20 },
       { header: "Address", key: "address", width: 30 },
-      { header: "Contact Number", key: "contactNumber", width: 30 },
+      { header: "Region", key: "region", width: 30 },
       { header: "Date Created", key: "createdAt", width: 20 },
       { header: "Reference ID", key: "referenceID", width: 15 }
     ];
@@ -69,11 +68,10 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     currentPosts.forEach((post) => {
       worksheet.addRow({
         companyName: post.CompanyName,
-        email: post.Email,
+        customertype: post.CustomerType,
         contactPerson: post.ContactPerson,
-        product: post.Product || "-",
         address: post.Address || "-",
-        contactNumber: post.ContactNumber || "-",
+        region: post.Region || "-",
         createdAt: new Date(post.createdAt).toLocaleString("en-PH", {
           year: "numeric",
           month: "short",
@@ -141,26 +139,26 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
           <tr>
+              <th className="text-center px-6 py-3 text-xs font-medium text-gray-700 tracking-wider">
+              Actions
+            </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Company Name
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Email
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Contact Person
+            </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Type of Client
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Address
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Contact Number
+              Area
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Date Created
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Actions
             </th>
           </tr>
         </thead>
@@ -171,45 +169,7 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                 key={index}
                 className="hover:bg-gray-50 transition-colors duration-150"
               >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="text-xs font-medium text-gray-900 uppercase">
-                      {post.CompanyName}
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Email}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.ContactPerson}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Address || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.ContactNumber || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-500">
-                    {new Date(post.createdAt).toLocaleString("en-PH", {
-                      year: "numeric",
-                      month: "short",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
+                 <td className=" px-6 py-4 whitespace-nowrap text-xs font-medium">
                   <div className="flex space-x-2">
                     <button
                       onClick={() => handleEdit(post)}
@@ -224,6 +184,44 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                     >
                       Delete
                     </button>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="text-xs font-medium text-gray-900 uppercase">
+                      {post.CompanyName}
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.ContactPerson}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.CustomerType}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.Address || "-"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">
+                    {post.Region || "-"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-500">
+                    {new Date(post.createdAt).toLocaleString("en-PH", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </div>
                 </td>
               </tr>

@@ -13,15 +13,14 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
     const {
       ActivityID,
       CompanyName,
-      Project,
-      Email,
+      AffiliateName,
       ContactPerson,
       ContactNumber,
+      Email,
       Address,
-      Category,
-      Type,
+      CustomerType,
+      Region,
       Status,
-      Source,
       createdBy
     } = req.body;
 
@@ -32,14 +31,13 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
     const activityData = {
       ActivityID,
       CompanyName,
-      Project,
-      Email,
+      AffiliateName,
       ContactPerson,
       ContactNumber,
+      Email,
       Address,
-      Category,
-      Type,
-      Source,
+      Region,
+      CustomerType,
       Status,
       createdBy,
       createdAt: new Date(),
@@ -52,10 +50,14 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
     // Insert selected fields into Accounts
     const customerData = {
       CompanyName,
+      AffiliateName,
+      ContactPerson,
       ContactNumber,
       Email,
+      Region,
       Address,
-      ContactPerson,
+      CustomerType,
+      Status,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

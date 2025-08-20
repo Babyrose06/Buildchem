@@ -9,7 +9,7 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
         const collection = db.collection("CustomerDatabase");
 
         const {
-            CompanyName, Email, ContactPerson, Address, ContactNumber, ReferenceID, createdBy
+            CompanyName, ContactPerson, CustomerType, Address, Region, ReferenceID, createdBy
         } = req.body;
 
         if (!CompanyName) {
@@ -18,10 +18,10 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
 
         const brand = {
             CompanyName,
-            Email,
+            CustomerType,
             ContactPerson,
             Address,
-            ContactNumber,
+            Region,
             ReferenceID: ReferenceID || "",
             createdBy,
             createdAt: new Date(),

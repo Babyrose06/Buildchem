@@ -43,10 +43,11 @@ const CompanyTab: React.FC<CompaniesTabProps> = ({ postData, handleChange }) => 
         if (!selectedCompany) {
             // Reset all related fields kapag walang company na selected
             handleChange({ target: { name: "CompanyName", value: "" } });
-            handleChange({ target: { name: "Email", value: "" } });
+            handleChange({ target: { name: "AffiliateName", value: "" } });
             handleChange({ target: { name: "ContactPerson", value: "" } });
-            handleChange({ target: { name: "Address", value: "" } });
             handleChange({ target: { name: "ContactNumber", value: "" } });
+            handleChange({ target: { name: "Email", value: "" } });
+            handleChange({ target: { name: "Address", value: "" } });
             return;
         }
 
@@ -59,10 +60,11 @@ const CompanyTab: React.FC<CompaniesTabProps> = ({ postData, handleChange }) => 
             if (!res.ok) return;
             const details = await res.json();
 
-            handleChange({ target: { name: "Email", value: details.Email || "" } });
+            handleChange({ target: { name: "AffiliateName", value: details.Email || "" } });
             handleChange({ target: { name: "ContactPerson", value: details.ContactPerson || "" } });
-            handleChange({ target: { name: "Address", value: details.Address || "" } });
             handleChange({ target: { name: "ContactNumber", value: details.ContactNumber || "" } });
+            handleChange({ target: { name: "Email", value: details.Email || "" } });
+            handleChange({ target: { name: "Address", value: details.Address || "" } });
         } catch (err) {
             console.error("Error fetching company details:", err);
         }
@@ -85,42 +87,42 @@ const CompanyTab: React.FC<CompaniesTabProps> = ({ postData, handleChange }) => 
                 <label className="block text-xs font-bold mb-1 mt-1">Company Name</label>
                 <div className="flex items-center gap-1">
                     <button
-                    type="button"
-                    onClick={() => setIsInput(!isInput)}
-                    className="text-xs px-3 py-2 border rounded hover:bg-blue-500 hover:text-white transition"
-                >
-                    <HiOutlineSwitchHorizontal size={15} />
-                </button>
-                {isInput ? (
-                    <input
-                        type="text"
-                        name="CompanyName"
-                        value={postData.CompanyName || ""}
-                        onChange={handleChange}
-                        className="border-b p-4 text-xs w-full capitalize"
-                        placeholder="Enter Company Name"
-                    />
-                ) : (
-                    <Select
-                        options={CompanyOptions}
-                        onChange={handleCompanyChange}
-                        className="pt-4 pb-4 text-xs w-full"
-                        placeholder="Select Company"
-                        isClearable
-                    />
-                )}
+                        type="button"
+                        onClick={() => setIsInput(!isInput)}
+                        className="text-xs px-2 py-2 border rounded hover:bg-blue-500 hover:text-white transition"
+                    >
+                        <HiOutlineSwitchHorizontal size={15} />
+                    </button>
+                    {isInput ? (
+                        <input
+                            type="text"
+                            name="CompanyName"
+                            value={postData.CompanyName || ""}
+                            onChange={handleChange}
+                            className="border-b p-2 text-xs w-full capitalize"
+                            placeholder="Enter Company Name"
+                        />
+                    ) : (
+                        <Select
+                            options={CompanyOptions}
+                            onChange={handleCompanyChange}
+                            className="pt-4 pb-4 text-xs w-full"
+                            placeholder="Select Company"
+                            isClearable
+                        />
+                    )}
 
                 </div>
-                
+
             </div>
 
             <div>
-                <label className="block p-1 text-xs font-bold mb-1">Email</label>
+                <label className="block p-1 text-xs font-bold mb-1">Affiliate Name</label>
                 <input
-                    name="Email"
-                    value={postData.Email || ""}
+                    name="AffiliateName"
+                    value={postData.AffiliateName || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 />
             </div>
@@ -131,18 +133,7 @@ const CompanyTab: React.FC<CompaniesTabProps> = ({ postData, handleChange }) => 
                     name="ContactPerson"
                     value={postData.ContactPerson || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
-                    required
-                />
-            </div>
-
-            <div>
-                <label className="block p-1 text-xs font-bold mb-1">Address</label>
-                <input
-                    name="Address"
-                    value={postData.Address || ""}
-                    onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 />
             </div>
@@ -153,10 +144,33 @@ const CompanyTab: React.FC<CompaniesTabProps> = ({ postData, handleChange }) => 
                     name="ContactNumber"
                     value={postData.ContactNumber || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 />
             </div>
+
+            <div>
+                <label className="block p-1 text-xs font-bold mb-1">Email</label>
+                <input
+                    name="Email"
+                    value={postData.Email || ""}
+                    onChange={handleChange}
+                    className="border-b p-2 text-xs w-full"
+                    required
+                />
+            </div>
+
+            <div>
+                <label className="block p-1 text-xs font-bold mb-1">Address</label>
+                <input
+                    name="Address"
+                    value={postData.Address || ""}
+                    onChange={handleChange}
+                    className="border-b p-2 text-xs w-full"
+                    required
+                />
+            </div>
+
         </div>
     );
 };

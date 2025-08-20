@@ -28,20 +28,15 @@ export default function Post() {
     const [editingPostId, setEditingPostId] = useState<string | null>(null);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [postsPerPage, setPostsPerPage] = useState(12);
+    const [postsPerPage, setPostsPerPage] = useState(5);
 
     const initialFormState = {
-        CompanyName: "",
-        Project: "",
-        Email: "",
+        CompanyName: "", 
+        AffiliateName: "",
         ContactPerson: "",
         ContactNumber: "",
+        Email: "",
         Address: "",
-        QuotationAmount: "",
-        SOAmount: "",
-        Category: "",
-        Type: "",
-        Source: "",
         Status: "",
         createdAt: "",
 
@@ -168,7 +163,7 @@ export default function Post() {
                                 <div className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-lg shadow-xl transform transition-all duration-300 ease-in-out overflow-y-auto p-4">
 
                                     {/* Header with close button */}
-                                    <div className="sticky top-0 z-10 flex justify-between p-4 bg-white border-b">
+                                    <div className="sticky top-0 z-10 flex justify-between p-2 bg-white border-b">
                                         <h3 className=" text-center text-lg font-bold text-gray-800 uppercase">
                                             {isEditMode ? "Edit Record" : "Fill out Form"}
                                         </h3>

@@ -7,12 +7,9 @@ import { saveAs } from "file-saver";
 interface Product {
   _id: string;
   CompanyName: string;
-  Project: string;
-  QuotationAmount: string;
-  SOAmount: string;
-  Category: string;
-  Type: string;
-  Source: string;
+  ContactPerson: string;
+  ContactNumber: string;
+  CustomerType: string;
   Status: string;
   ReferenceID: string;
   createdAt: string;
@@ -38,12 +35,9 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     // Set columns
     worksheet.columns = [
       { header: "Company Name", key: "companyName", width: 25 },
-      { header: "Project", key: "project", width: 25 },
-      { header: "Quotation Amount", key: "quotation", width: 20 },
-      { header: "SO Amount", key: "soAmount", width: 20 },
-      { header: "Project Category", key: "category", width: 30 },
-      { header: "Project Type", key: "type", width: 30 },
-      { header: "Source", key: "source", width: 30 },
+      { header: "ContactPerson", key: "contactPerson", width: 25 },
+      { header: "ContactNumber", key: "contactNumber", width: 20 },
+      { header: "CustomerType", key: "customerType", width: 20 },
       { header: "Status", key: "status", width: 30 },
       { header: "Date Created", key: "createdAt", width: 20 },
       { header: "Reference ID", key: "referenceID", width: 15 }
@@ -73,13 +67,10 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
     currentPosts.forEach((post) => {
       worksheet.addRow({
         companyName: post.CompanyName,
-        project: post.Project,
-        quotation: post.QuotationAmount,
-        soAmount: post.SOAmount,
-        category: post.Category,
-        source: post.Source,
+        contactPerson: post.ContactPerson,
+        contactNumber: post.ContactNumber,
+        customerType: post.CustomerType,
         status: post.Status,
-        type: post.Type,
         createdAt: new Date(post.createdAt).toLocaleString("en-PH", {
           year: "numeric",
           month: "short",
@@ -160,22 +151,13 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
               Company Name
             </th>
             <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Project Name
+              Contact Person
             </th>
             <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Quotation Amount
+              Contact Number
             </th>
-            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              SO Amount (Sales Order)
-            </th>
-            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Project Category
-            </th>
-            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Project Type
-            </th>
-            <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
-              Source
+             <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+              Type of Client
             </th>
             <th className="text-left px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Status
@@ -217,32 +199,17 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.Project}
+                    {post.ContactPerson}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.QuotationAmount}
+                    {post.ContactNumber}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xs text-gray-700">
-                    {post.SOAmount || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Category || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Type || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Source || "-"}
+                    {post.CustomerType || "-"}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">

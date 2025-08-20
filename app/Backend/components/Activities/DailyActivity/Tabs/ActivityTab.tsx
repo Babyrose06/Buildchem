@@ -14,22 +14,43 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
         <div>
 
             <div>
+                <label className="block p-1 text-xs font-bold mb-1">Region</label>
+                <select
+                    name="Region"
+                    value={postData.Region || ""}
+                    onChange={handleChange}
+                    className="border-b p-2 text-xs w-full"
+                    required
+                >
+                    <option value="" disabled hidden>
+                        Select Region
+                    </option>
+                    <option value="Region I"> Region I - Ilocos Region</option>
+                    <option value="Region II"> Region II - Cagayan Valley  </option>
+                    <option value="Region III"> Region III - Central Luzon </option>
+                    <option value="Region IV"> Region IV - CALABARZON </option>
+                    <option value="Region V"> Region V - Bicol Region</option>
+                </select>
+            </div>
+
+
+            <div>
                 <label className="block p-1 text-xs font-bold mb-1">Type of Customer </label>
                 <select
                     name="CustomerType"
                     value={postData.CustomerType || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 >
                     <option value="" disabled hidden>
                         Select Client
                     </option>
-                    <option value="Top50"> Top 50</option>
-                    <option value="Next30"> Next 30</option>
-                    <option value="Balance20"> Balance 20 </option>
-                    <option value="CSRClient"> CSR Client </option>
-                    <option value="TSAClient"> TSA Client</option>
+                    <option value="Top 50"> Top 50</option>
+                    <option value="Next 30"> Next 30</option>
+                    <option value="Balance 20"> Balance 20 </option>
+                    <option value="CSR Client"> CSR Client </option>
+                    <option value="TSA Client"> TSA Client</option>
                 </select>
             </div>
 
@@ -39,15 +60,15 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                     name="CustomerStatus"
                     value={postData.CustomerStatus || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 >
                     <option value="" disabled hidden>
                         Select Client Status
                     </option>
                     <option value="Active"> Active </option>
-                    <option value="NewClient"> New Client </option>
-                    <option value="NonBuying"> Non-Buying </option>
+                    <option value="New Client"> New Client </option>
+                    <option value="Non Buying"> Non-Buying </option>
                     <option value="Inactive"> Inactive  </option>
 
                 </select>
@@ -60,23 +81,23 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                     name="Source"
                     value={postData.Source || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 >
                     <option value="" disabled hidden>
                         Select Type
                     </option>
                     <option value="Existing"> Existing Client </option>
-                    <option value="CSRInquiries"> CSR Inquiries </option>
-                    <option value="OutboundFollowUp"> Outbound - Follow-Up </option>
-                    <option value="OutboundTouchbase"> Outbound - Touchbase </option>
+                    <option value="CSR Inquiries"> CSR Inquiries </option>
+                    <option value="Outbound - Follow-Up"> Outbound - Follow-Up </option>
+                    <option value="Outbound - Touchbase"> Outbound - Touchbase </option>
                     <option value="Government"> Government  </option>
-                    <option value="PhilgepsWebsite"> Philgeps - Website  </option>
+                    <option value="Philgeps - Website"> Philgeps - Website  </option>
                     <option value="Philgeps"> Philgeps  </option>
                     <option value="Distributor"> Distributor  </option>
-                    <option value="ModernTrade"> Modern Trade  </option>
-                    <option value="Marketplace"> Facebook Marketplace  </option>
-                    <option value="Showroom"> Walk-in / Showroom  </option>
+                    <option value="Modern Trade"> Modern Trade  </option>
+                    <option value="Facebook Marketplace"> Facebook Marketplace  </option>
+                    <option value="Walk-in / Showroom"> Walk-in / Showroom  </option>
                 </select>
             </div>
 
@@ -85,7 +106,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                 <select name="TypeActivity"
                     value={postData.TypeActivity || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required>
                     <option value="" > Select Activity </option>
                     <option value="Customer Order" > Customer Order </option>
@@ -120,7 +141,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                         name="Type"
                         value={postData.Type || ""}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                         required
                     >
                         <option value="" disabled hidden>
@@ -134,13 +155,13 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
 
             {postData.TypeActivity === "Quotation Prepation" && (
 
-                <div>
+                <div> 
                     <label className="block p-1 text-xs font-bold mb-1">Project Name</label>
-                    <input
+                    <input 
                         name="ProjectName"
                         value={postData.ProjectName || " "}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                         required
                     />
                     <div>
@@ -149,7 +170,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                             name="ItemCategory"
                             value={postData.ItemCategory || " "}
                             onChange={handleChange}
-                            className="border-b p-3 text-xs w-full"
+                            className="border-b p-2 text-xs w-full"
                             required
                         />
                         <div>
@@ -158,7 +179,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                                 name="CustomerType"
                                 value={postData.CustomerType || ""}
                                 onChange={handleChange}
-                                className="border-b p-3 text-xs w-full"
+                                className="border-b p-2 text-xs w-full"
                                 required
                             >
                                 <option value="" disabled hidden>
@@ -167,9 +188,9 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                                 <option value="B2B"> B2B </option>
                                 <option value="B2C"> B2C </option>
                                 <option value="B2G"> B2G </option>
-                                <option value="Trade"> General Trade </option>
+                                <option value="General Trade"> General Trade </option>
                                 <option value="Personal"> Personal  </option>
-                                <option value="Building"> Building Maintenance </option>
+                                <option value="Building Maintenance"> Building Maintenance </option>
                             </select>
 
                             <label className="block p-1 text-xs font-bold mb-1">Quotation Number</label>
@@ -177,7 +198,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                                 name="QuotationNumber"
                                 value={postData.QuotationNumber || ""}
                                 onChange={handleChange}
-                                className="border-b p-3 text-xs w-full"
+                                className="border-b p-2 text-xs w-full"
                             />
 
                             <label className="block p-1 text-xs font-bold mb-1">Quotation Amount</label>
@@ -185,7 +206,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                                 name="QuotationAmount"
                                 value={postData.QuotationAmount || ""}
                                 onChange={handleChange}
-                                className="border-b p-3 text-xs w-full"
+                                className="border-b p-2 text-xs w-full"
 
                             />
 
@@ -194,16 +215,16 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                                 name="Type"
                                 value={postData.Type || ""}
                                 onChange={handleChange}
-                                className="border-b p-3 text-xs w-full"
+                                className="border-b p-2 text-xs w-full"
                                 required
                             >
                                 <option value="" disabled hidden>
                                     Select Status
                                 </option>
-                                <option value="StandardQuotation">Sent Quotation - Standard </option>
-                                <option value="SpecialPrice"> Sent Quotation - With Special Price </option>
-                                <option value="QuotationWithSPF">Sent Quotation - With SPF</option>
-                                <option value="WithSPF"> With SPFS </option>
+                                <option value="Standard Quotation">Sent Quotation - Standard </option>
+                                <option value=" Sent Quotation - With Special Price"> Sent Quotation - With Special Price </option>
+                                <option value="Sent Quotation - With SPF">Sent Quotation - With SPF</option>
+                                <option value="With SPFS"> With SPFS </option>
                             </select>
 
                         </div>
@@ -220,7 +241,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                         name="SONumber"
                         value={postData.SONumber || ""}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                     />
 
                     <label className="block p-1 text-xs font-bold mb-1">SO Amount </label>
@@ -228,7 +249,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                         name="SOAmount"
                         value={postData.SOAmount || ""}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                     />
 
                     <label className="block p-1 text-xs font-bold mb-1">Type </label>
@@ -236,20 +257,20 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                         name="Type"
                         value={postData.Type || ""}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                         required
                     >
                         <option value="" disabled hidden>
                             Select Status
                         </option>
-                        <option value="RegularSO">Regular SO </option>
-                        <option value="WillingToWait"> Willing To Wait </option>
-                        <option value="SpecialProject">SPF - Special Project</option>
-                        <option value="SPFLocal"> SPF - Local </option>
-                        <option value="SPFForeign">SPF - Foreign </option>
+                        <option value="Regular SO">Regular SO </option>
+                        <option value="Willing To Wait"> Willing To Wait </option>
+                        <option value="SPF - Special Project">SPF - Special Project</option>
+                        <option value="SPF - Local"> SPF - Local </option>
+                        <option value="SPF - Foreign">SPF - Foreign </option>
                         <option value="Promo"> Promo </option>
-                        <option value="FBMarketplace">FB Marketplace</option>
-                        <option value="InternalOrder"> Internal Order </option>
+                        <option value="FB Marketplace">FB Marketplace</option>
+                        <option value="Internal Order"> Internal Order </option>
                     </select>
 
                 </div>
@@ -263,27 +284,95 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                         name="Calltype"
                         value={postData.Calltype || ""}
                         onChange={handleChange}
-                        className="border-b p-3 text-xs w-full"
+                        className="border-b p-2 text-xs w-full"
                         required
                     >
                         <option value="" disabled hidden>
                             Select Type of Call
                         </option>
-                        <option value="AfterSales">After Sales (Warranty, Replacement, Certificates)</option>
-                        <option value="DeliveryConcern"> Delivery Concern </option>
-                        <option value="DeliveryConcern"> Accounting Concern </option>
+                        <option value="After Sales (Warranty, Replacement, Certificates)">After Sales (Warranty, Replacement, Certificates)</option>
+                        <option value="Delivery Concern"> Delivery Concern </option>
+                        <option value="Accounting Concern"> Accounting Concern </option>
                     </select>
                 </div>
             )}
 
-            <div>
-                <label className="block p-1 text-xs font-bold mb-1">Remarks</label>
-                <input
-                    name="Enter Remarks Here.."
-                    value={postData.Remarks || " "}
+            {postData.TypeActivity === "Outbound Calls" && (
+
+                <div>
+                    <label className="block p-1 text-xs font-bold mb-1">Callbacks </label>
+                    <select
+                        name="Callbacks"
+                        value={postData.Callbacks || ""}
+                        onChange={handleChange}
+                        className="border-b p-2 text-xs w-full"
+                        required
+                    >
+                        <option value="" disabled hidden>
+                            Select Callback
+                        </option>
+                        <option value="CallbackTomorrow">Callback Tomorrow</option>
+                        <option value="Callback3Days"> Callback after 3 Days </option>
+                        <option value="CallbackWeek"> Callback after a Week </option>
+                        <option value="PickDate"> Pick a Date </option>
+                    </select>
+
+                    <label className="block p-1 text-xs font-bold mb-1">Call Status </label>
+                    <select
+                        name="CallStatus"
+                        value={postData.CallStatus || ""}
+                        onChange={handleChange}
+                        className="border-b p-2 text-xs w-full"
+                        required
+                    >
+                        <option value="" disabled hidden>
+                            Select status
+                        </option>
+                        <option value="CallbackTomorrow">Successful</option>
+                        <option value="Callback3Days"> Unsuccessful </option>
+                    </select>
+
+                    <label className="block p-1 text-xs font-bold mb-1">Type of Call </label>
+                    <select
+                        name="TypeCall"
+                        value={postData.TypeCall || ""}
+                        onChange={handleChange}
+                        className="border-b p-2 text-xs w-full"
+                        required
+                    >
+                        <option value="" disabled hidden>
+                            Select Type
+                        </option>
+                        <option value="CallbackTomorrow">Ringing Only</option>
+                        <option value="Callback3Days"> No Requirements </option>
+                        <option value="CallbackTomorrow">Cannot Be Reached</option>
+                        <option value="Callback3Days"> Not Connected with the Company </option>
+                        <option value="Callback3Days"> Waiting for future Projects </option>
+                    </select>
+                </div>
+            )}
+
+            {postData.Callbacks === "PickDate" && (
+
+                <div>
+                    <label className="block p-1 text-xs font-bold mb-1">Callbacks </label>
+                    <input
+                    type="datetime-local"
+                    value={postData.Callbacks || " "}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
+                />
+                </div>
+            )}
+
+             <div>
+                 <label className="block p-1 text-xs font-bold mb-1">Remarks</label>
+                    <input
+                        name="Remarks"
+                        value={postData.Remarks || ""}
+                        onChange={handleChange}
+                        className="border-b p-2 text-xs w-full"
                 />
             </div>
 
@@ -294,7 +383,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                     name="Status"
                     value={postData.Status || ""}
                     onChange={handleChange}
-                    className="border-b p-3 text-xs w-full"
+                    className="border-b p-2 text-xs w-full"
                     required
                 >
                     <option value="" disabled hidden>
