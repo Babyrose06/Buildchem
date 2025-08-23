@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
+
 
 interface Product {
   _id: string;
@@ -24,6 +25,18 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete }) => {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay (or replace with actual fetch logic)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // 1 second delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleExport = async () => {
     // Create a new workbook
     const workbook = new ExcelJS.Workbook();
@@ -139,7 +152,7 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
           <tr>
-              <th className="text-center px-6 py-3 text-xs font-medium text-gray-700 tracking-wider">
+            <th className="text-center px-6 py-3 text-xs font-medium text-gray-700 tracking-wider">
               Actions
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
@@ -148,7 +161,7 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Contact Person
             </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
               Type of Client
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 tracking-wider">
@@ -163,72 +176,37 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {currentPosts.length > 0 ? (
-            currentPosts.map((post, index) => (
-              <tr
-                key={index}
-                className="hover:bg-gray-50 transition-colors duration-150"
-              >
-                 <td className=" px-6 py-4 whitespace-nowrap text-xs font-medium">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEdit(post)}
-                      className="text-indigo-600 hover:text-indigo-900 hover:underline"
-                    >
-                      Edit
-                    </button>
-                    <span className="text-gray-300">|</span>
-                    <button
-                      onClick={() => handleDelete(post._id)}
-                      className="text-red-600 hover:text-red-900 hover:underline"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="text-xs font-medium text-gray-900 uppercase">
-                      {post.CompanyName}
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.ContactPerson}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.CustomerType}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Address || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-700">
-                    {post.Region || "-"}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xs text-gray-500">
-                    {new Date(post.createdAt).toLocaleString("en-PH", {
-                      year: "numeric",
-                      month: "short",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </div>
-                </td>
-              </tr>
-            ))
-          ) : (
+          {isLoading ? (
             <tr>
-              <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
+              <td colSpan={7} className="px-6 py-4 text-center text-sm text-gray-500">
+                <div className="flex flex-col items-center justify-center py-8">
+                  <svg
+                    className="animate-spin h-8 w-8 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+                  <span className="mt-2">Loading data...</span>
+                </div>
+              </td>
+            </tr>
+          ) : currentPosts.length === 0 ? (
+            <tr>
+              <td colSpan={7} className="px-6 py-4 text-center text-sm text-gray-500">
                 <div className="flex flex-col items-center justify-center py-8">
                   <svg
                     className="w-12 h-12 text-gray-400"
@@ -248,8 +226,59 @@ const Table: React.FC<TableProps> = ({ currentPosts, handleEdit, handleDelete })
                 </div>
               </td>
             </tr>
+          ) : (
+            currentPosts.map((post, index) => (
+              <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEdit(post)}
+                      className="text-indigo-600 hover:text-indigo-900 hover:underline"
+                    >
+                      Edit
+                    </button>
+                    <span className="text-gray-300">|</span>
+                    <button
+                      onClick={() => handleDelete(post._id)}
+                      className="text-red-600 hover:text-red-900 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs font-medium text-gray-900 uppercase">
+                    {post.CompanyName}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">{post.ContactPerson}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">{post.CustomerType}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">{post.Address || "-"}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-700">{post.Region || "-"}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xs text-gray-500">
+                    {new Date(post.createdAt).toLocaleString("en-PH", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
+                </td>
+              </tr>
+            ))
           )}
         </tbody>
+
       </table>
     </div>
   );

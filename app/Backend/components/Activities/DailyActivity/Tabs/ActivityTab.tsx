@@ -68,7 +68,7 @@ const TicketTab: React.FC<TicketTabProps> = ({ postData, handleChange }) => {
                     </option>
                     <option value="Active"> Active </option>
                     <option value="New Client"> New Client </option>
-                    <option value="Non Buying"> Non-Buying </option>
+                    <option value="Non-Buying"> Non-Buying </option>
                     <option value="Inactive"> Inactive  </option>
 
                 </select>

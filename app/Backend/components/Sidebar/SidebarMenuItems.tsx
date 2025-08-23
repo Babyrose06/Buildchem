@@ -28,6 +28,18 @@ const getMenuItems = (userId: string | null = "") => {
         description: "Outbound/ CSR Endorse / Client Dev",
         href: buildHref("/Backend/Buildchem/Database/NewClient", userId),
       },
+
+      {
+        title: "Non-Buying",
+        description: "Existing Client / Continous Quote / No SO",
+        href: buildHref("/Backend/Buildchem/Database/Non-Buying", userId),
+      },
+
+      {
+        title: "Inactive",
+        description: "Order 6 Months Ago - Last Purchased",
+        href: buildHref("/Backend/Buildchem/Database/Inactive", userId),
+      },
     ],
     
   });
