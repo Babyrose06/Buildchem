@@ -19,10 +19,17 @@ const getMenuItems = (userId: string | null = "") => {
     subItems: [
       {
         title: "Active",
-        description: "View all your published and draft data",
+        description: "View all your regular client",
         href: buildHref("/Backend/Buildchem/Database/Active", userId),
       },
+
+      {
+        title: "New Client",
+        description: "Outbound/ CSR Endorse / Client Dev",
+        href: buildHref("/Backend/Buildchem/Database/NewClient", userId),
+      },
     ],
+    
   });
 
    menu.push({

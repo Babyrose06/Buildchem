@@ -37,11 +37,14 @@ export default function Post() {
         Product: "",
         Address: "",
         ContactNumber: "",
+        CustomerStatus: "",
         createdAt: "",
 
     };
 
     const [postData, setPostData] = useState(initialFormState);
+    const [customerStatusFilter, setCustomerStatusFilter] = useState("");
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const fetchPosts = async (refId: string) => {
@@ -81,7 +84,7 @@ export default function Post() {
     useEffect(() => {
         let filtered = posts;
 
-        filtered = filtered.filter((post) => post.CustomerStatus === "Active");
+         filtered = filtered.filter((post) => post.CustomerStatus === "New Client");
 
         // Filter by search term (CompanyName)
         if (searchTerm) {
@@ -103,8 +106,14 @@ export default function Post() {
             });
         }
 
+        if (customerStatusFilter) {
+        filtered = filtered.filter((post) =>
+            post.CustomerStatus === customerStatusFilter
+        );
+    }
+
         setFilteredPosts(filtered);
-    }, [posts, searchTerm, startDate, endDate]);
+    }, [posts, searchTerm, startDate, endDate, customerStatusFilter]);
 
     //Pagination
 
@@ -141,7 +150,7 @@ export default function Post() {
             <ParentLayout>
                 <div className="container mx-auto p-4 text-gray-900">
                     <div className="grid grid-cols-1 md:grid-cols-1">
-                        <h1 className="text-2xl font-bold mb-6">Customer Database - Active</h1>
+                        <h1 className="text-2xl font-bold mb-6">Customer Database - New Client</h1>
 
                         {showForm && (
                             <div className="fixed inset-0 z-[999] overflow-hidden">

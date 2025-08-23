@@ -20,6 +20,7 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
       Address,
       CustomerType,
       Region,
+      CustomerStatus,
       Status,
       createdBy
     } = req.body;
@@ -37,6 +38,7 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
       Email,
       Address,
       Region,
+      CustomerStatus,
       CustomerType,
       Status,
       createdBy,
@@ -57,6 +59,7 @@ export default async function createProduct(req: NextApiRequest, res: NextApiRes
       Region,
       Address,
       CustomerType,
+      CustomerStatus,
       Status,
       createdAt: new Date(),
       updatedAt: new Date(),
